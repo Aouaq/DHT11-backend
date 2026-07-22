@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dht11-backend",
+  "compatibility_date": "2026-01-01",
+  "containers": [
+    {
+      "name": "dht11backend",
+      "image": "docker.io/aouaq/dht11backend:latest"
+    }
+  ]
+}

@@ -30,18 +30,18 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/dht11backend:latest
           
   deploy-cloudflare:
-      needs: build-and-push
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout Code
-          uses: actions/checkout@v4
-  
-        - name: Deploy Container to Cloudflare
-          uses: cloudflare/wrangler-action@v3
-          with:
-            apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-            accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-            wranglerVersion: "latest"
-            preCommands: |
-              npx wrangler containers registries configure docker.io --dockerhub-username=${{ secrets.DOCKER_USERNAME }}
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Cloudflare Containers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: "latest"
+          preCommands: |
+            npx wrangler containers registries configure docker.io --dockerhub-username=${{ secrets.DOCKER_USERNAME }}
             

@@ -43,4 +43,4 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           wranglerVersion: "latest"
           preCommands: |
-            echo "${{ secrets.DOCKERHUB_LOGIN_TOKEN }}" | npx wrangler containers registries configure docker.io --dockerhub-username=${{ secrets.DOCKER_USERNAME }} --skip-confirmation
+            printf '%s' "${{ secrets.DOCKERHUB_LOGIN_TOKEN }}" | npx wrangler containers registries configure docker.io --dockerhub-username=${{ secrets.DOCKER_USERNAME }} --skip-confirmation

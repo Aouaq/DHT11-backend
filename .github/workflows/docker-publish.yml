@@ -42,3 +42,6 @@ jobs:
             apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
             accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
             wranglerVersion: "latest"
+            preCommands: |
+              npx wrangler containers registries configure docker.io --dockerhub-username=${{ secrets.DOCKER_USERNAME }}
+            

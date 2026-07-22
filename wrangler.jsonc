@@ -4,8 +4,22 @@
   "compatibility_date": "2026-01-01",
   "containers": [
     {
-      "name": "dht11backend",
+      "class_name": "Dht11BackendContainer", // <--- THIS WAS MISSING
       "image": "docker.io/aouaq/dht11backend:latest"
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "DHT11_CONTAINER",
+        "class_name": "Dht11BackendContainer"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["Dht11BackendContainer"]
     }
   ]
 }

@@ -6,10 +6,10 @@ on:
       - "master"
 
 jobs:
-  docker:
+  build-and-push:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Log in to Docker Hub
@@ -20,14 +20,10 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-        with:
-          driver: cloud
-          endpoint: "aouaq/dht11backend"
 
-      - name: Build and push
-        uses: docker/build-push-action@v6
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
         with:
-          tags: "${{ secrets.DOCKER_USERNAME }}/docker-build-cloud-demo:latest"
-          outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || 'type=registry' }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/dht11backend:latest
